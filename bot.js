@@ -35,13 +35,14 @@ bot.on('message', async message => {
 		message.channel.sendEmbed(embed);
 
 		return;
+	}
 
-		// bot.guilds.get("id") // message.guilds.id or message.id
-		// bot.guilds.find("name", "hello :3")
-		// bot.guilds.find(guild => guild.members.size >= 10) // guild.members.size returns true but find returns guild
-		// bot.guilds.has("id") // return true
-		// bot.guilds.exists("name", "hello :3") // return true
-		// bot.guilds.exists(guild => guild.name === "hello :3") // return true
+	if (command === `${prefix}mute`) {
+		// message.mentions.users.first() returns a toMute.username and is for @mentions
+		let toMute = message.mentions.users.first() || message.guild.members.get(args[0]);
+		if (!toMute) return message.channel.sendMessage("You did not specify a user mentioned or ID!");
+
+		return message.reply(toMute.username || toMute.user.username)
 	}
 });
 
