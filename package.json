@@ -1,0 +1,19 @@
+{
+  "name": "dbotthreebow",
+  "version": "0.0.1",
+  "description": "Test Discord Bot by Threebow",
+  "main": "bot.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mymggithub/Discord-Bot-Threebow.git"
+  },
+  "author": "mymggithub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mymggithub/Discord-Bot-Threebow/issues"
+  },
+  "homepage": "https://github.com/mymggithub/Discord-Bot-Threebow#readme",
+  "dependencies": {
+    "discord.js": "^11.4.2"
+  }
+}
