@@ -6,12 +6,6 @@ const prefix = botSettings.prefix;
 const bot = new Discord.Client({disableEveryone: true});
 bot.on('ready', async () => {
 	console.log(`Bot is ready ${bot.user.username}`);
-
-	// bot.generateInvite(["ADMINISTRATOR"]).then(link => {
-	// 	console.log(link);
-	// }).catch(err =>{
-	// 	console.log(err.stack);
-	// });
 	
 	try {
 		let link = await bot.generateInvite(["ADMINISTRATOR"]);
@@ -21,7 +15,7 @@ bot.on('ready', async () => {
 	}
 });
 bot.on('message', async message => {
-	if (message.author.bot) return;// message.channel.sendMessage("No bots allowed!");
+	if (message.author.bot) return;
 	if (message.channel.type === "dm") return;
 
 	let messageArray = message.content.split(" ");
@@ -41,6 +35,13 @@ bot.on('message', async message => {
 		message.channel.sendEmbed(embed);
 
 		return;
+
+		// bot.guilds.get("id") // message.guilds.id or message.id
+		// bot.guilds.find("name", "hello :3")
+		// bot.guilds.find(guild => guild.members.size >= 10) // guild.members.size returns true but find returns guild
+		// bot.guilds.has("id") // return true
+		// bot.guilds.exists("name", "hello :3") // return true
+		// bot.guilds.exists(guild => guild.name === "hello :3") // return true
 	}
 });
 

@@ -1,0 +1,6 @@
+{
+	"ignore": ["botSettings.json"],
+	"events": {
+		"start": "node -e console.clear()"
+	}
+}
