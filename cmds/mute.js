@@ -1,4 +1,4 @@
-const Discord = module.require('discord.js');
+const fs = module.require('fs');
 module.exports.run = async (bot, message, args) => {
 	if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.send("You do not have manage messages!");
 
@@ -32,8 +32,16 @@ module.exports.run = async (bot, message, args) => {
 
 	if (toMute.roles.has(role.id)) return message.channel.send("This user is already muted!");
 
+	bot.mutes[toMute.id] = {
+		guild: message.guild.id,
+		time: Date.now() + parseInt(args[1]) * 1000
+	}
+
 	await toMute.addRole(role);
-	message.channel.send("I have muted them!");
+	fs.writeFile("./mutes.json", JSON.stringify(bot.mutes, null, 4), err => {
+		if (err) throw err;
+		message.channel.send("I have muted them!");
+	});
 }
 
 module.exports.help = {

@@ -1,4 +1,4 @@
-const Discord = module.require('discord.js');
+const fs = module.require('fs');
 module.exports.run = async (bot, message, args) => {
 	if (!message.member.hasPermission("MANAGE_MESSAGES")) return message.channel.sendMessage("You do not have manage messages!");
 
@@ -11,7 +11,12 @@ module.exports.run = async (bot, message, args) => {
 
 
 	await toMute.removeRole(role);
-	message.channel.send("I have unmuted them!");
+
+	delete bot.mutes[toMute.id];
+	fs.writeFile("./mutes.json", JSON.stringify(bot.mutes, null, 4), err => {
+		if (err) throw err;
+		console.log(`I have unmuted ${toMute.user.tag}.`);
+	})
 }
 
 module.exports.help = {

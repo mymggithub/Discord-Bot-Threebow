@@ -1,5 +1,5 @@
 {
-	"ignore": ["botSettings.json"],
+	"ignore": ["*.json"],
 	"events": {
 		"start": "node -e console.clear()"
 	}
