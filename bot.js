@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const prefix = botSettings.prefix;
 
-const bot = new Discord.Client({disableEveryone: true});
+const bot = new Discord.Client({}); // disableEveryone: true
 bot.commands = new Discord.Collection();
 bot.mutes = require("./mutes.json");
 fs.readdir("./cmds/", (err, files) => {
@@ -14,11 +14,11 @@ fs.readdir("./cmds/", (err, files) => {
 		console.log("No commands to load!");
 		return;
 	}
-	console.log(`Loading ${jsfiles.length} commands!`);
+	// console.log(`Loading ${jsfiles.length} commands!`);
 
 	jsfiles.forEach((f, i) => {
 		let props = require(`./cmds/${f}`);
-		console.log(`${i + 1}: ${f} loaded!`)
+		// console.log(`${i + 1}: ${f} loaded!`)
 		bot.commands.set(props.help.name, props);
 	});
 })
@@ -52,7 +52,7 @@ bot.on('ready', async () => {
 				})
 			}
 		}
-	}, 5000)
+	}, 5000);
 });
 bot.on('message', async message => {
 	if (message.author.bot) return;
