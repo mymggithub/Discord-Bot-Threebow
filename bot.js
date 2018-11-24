@@ -1,6 +1,8 @@
 const botSettings = require('./botSettings.json');
 const Discord = require('discord.js');
 const fs = require('fs');
+const mysql = require('mysql');
+
 const prefix = botSettings.prefix;
 
 const bot = new Discord.Client({}); // disableEveryone: true
@@ -22,6 +24,18 @@ fs.readdir("./cmds/", (err, files) => {
 		bot.commands.set(props.help.name, props);
 	});
 })
+
+var con = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: "1234",
+	database: "sadb"
+});
+
+con.connect(err => {
+	if (err) throw err;
+	console.log("Connected to database!");
+});
 
 bot.on('ready', async () => {
 	console.log(`Bot is ready ${bot.user.username}`);
